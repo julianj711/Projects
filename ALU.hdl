@@ -1,0 +1,50 @@
+CHIP ALU {
+    IN  
+        x[16], y[16],  // 16-bit inputs        
+        zx, // zero the x input?
+        nx, // negate the x input?
+        zy, // zero the y input?
+        ny, // negate the y input?
+        f,  // compute (out = x + y) or (out = x & y)?
+        no; // negate the out output?
+    OUT 
+        out[16], // 16-bit output
+        zr,      // if (out == 0) equals 1, else 0
+        ng;      // if (out < 0)  equals 1, else 0
+
+    PARTS:
+
+    //// Replace this comment with your code.
+
+    //Zero x input if zx == 1
+    Mux16(a= x, b= false, sel= zx, out= xout1);
+
+    //Negate x input if nx ==1
+    Not16(in= xout1, out= xnOut1);
+    Mux16(a= xout1, b= xnOut1, sel= nx, out= xout2);
+
+    //zero y input if zy ==1
+    Mux16(a= y, b= false, sel= zy, out= yout1);
+
+    //negate y input if ny ==1
+    Not16(in= yout1, out= ynOut1);
+    Mux16(a= yout1, b= ynOut1, sel= ny, out= yout2);
+
+    //Compute x&y or x+y depending on f
+    And16(a= xout2, b= yout2, out= xyAnd);
+    Add16(a = xout2, b = yout2, out = xySum);
+    Mux16(a= xyAnd, b= xySum, sel= f, out= xyOut);
+
+    //Negate output if no ==1
+    Not16(in= xyOut, out= nxy);
+    Mux16(a= xyOut, b= nxy, sel= no, out=out, out[15]=ng, out[0..7]=zrLow, out[8..15]=zrHigh);
+
+    // Compute the zero flag (zr)
+    // zr = 1 if all bits of out are zero
+    Or8Way(in=zrLow, out=zrLowOut);
+    Or8Way(in=zrHigh, out=zrHighOut);
+    Or(a=zrLowOut, b=zrHighOut, out=zrTemp);
+    Not(in=zrTemp, out=zr);
+
+
+}
