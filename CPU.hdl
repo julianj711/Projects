@@ -12,7 +12,6 @@ CHIP CPU {
         pc[15];          // address of next instruction
 
     PARTS:
-	//// Replace this comment with your code.
     Mux16(a= false, b= instruction, sel= instruction[15], out[0]= cJGT, out[1]= cJEQ, out[2]= cJLT, out[3]= cM, out[3]= writeM, out[4]= cD, out[5]= cA, out[6]= cAluNo, out[7]= cAluF, out[8]= cAluNy, out[9]= cAluZy, out[10]= cAluNx, out[11]= cAluZx, out[12]=cAorM, out[15]=cType);
 
     //ALU with control bits assigned from Mux16
