@@ -1,3 +1,6 @@
+#Programmer: Julian Jaramillo
+#Hangman-like game that demonstrates webscraping using beautifulSoup and excel
+
 from openpyxl import load_workbook
 import requests
 from bs4 import BeautifulSoup
