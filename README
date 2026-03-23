@@ -1,3 +1,35 @@
-Hello
-My name is Julian Jaramillo
-I am a computer science Major with a focus on Advanced Software Engineering
+SetUp Instructions:
+1. Activate the virtual environment:
+source homework2_env/bin/activate
+
+2. Navigate to the project directory:
+cd cs4300/homework2/movie_theater_booking
+
+3. Start the server:
+python3 manage.py runserver 0.0.0.0:3000
+
+4. Open the app:
+Click the APP button in DevEdu or open the URL in your browser:
+https://editor-cs5300-21.devedu.io
+
+Logging In:
+You will be prompted with a login screen. Use the following credentials:
+Username:
+Password:
+
+Using the App:
+Once logged in you will see the movie listing page with all previously added movies.
+Book Now — Click on any movie to view available seats and book one
+My Booking History — View all seats you have booked
+Movie Theater (top left) — Always takes you back to the movie listing page
+Add Movies — Takes you to the Django admin panel where you can manage:
+Movies, Seats, and Bookings
+Users and Groups with specefic admin permissions for specific users
+To return from admin — Simply delete /admin/ from the browser URL
+Logout — Click the Logout button in the top right corner when done
+
+Adding New Users:
+To create a new user from the terminal:
+python3 manage.py createsuperuser
+You will be prompted for a Username, Email, and Password. 
+You can also create and manage users directly through the admin panel and hand out login credentials as needed.
