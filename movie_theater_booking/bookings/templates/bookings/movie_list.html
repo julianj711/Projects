@@ -1,0 +1,23 @@
+{% extends 'bookings/base.html' %}
+{% block title %} Movie List {% endblock %}
+{% block content %}
+
+<h2 class="mb-4">Now Showing</h2>
+<a href="{% url 'booking_history' %}" class="btn btn-dark-green mb-3">My Booking History</a>
+<a href="/admin" class="btn btn-dark-green mb-3">Add Movies</a>
+<div class="row g-3">
+    {% for movie in movies %}
+    <div class="col-md-4">
+        <div class="card rounded-3 p-3">
+            <h5 class="fw-bold">{{ movie.title }}</h5>
+            <p class="text-secondary">{{ movie.description }}</p>
+            <small class="text-secondary"> {{ movie.duration }} min | {{ movie.release_date }}</small>
+            <a href="{% url 'book_seat' movie.id %}" class="btn btn-dark-green mt-3">Book Now</a>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-secondary">No movies available right now.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
